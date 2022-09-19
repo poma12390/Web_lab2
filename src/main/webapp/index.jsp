@@ -104,7 +104,7 @@
             content: attr(data-tooltip); /* Выводим текст */
         }
 
-       input[type="submit"] {
+        input[type="submit"] {
             display: flex;
             margin: 1%;
             height: 28px;
@@ -181,7 +181,8 @@
             transition: opacity 0.5s;
             font-size: 14px;
         }
-        .divi{
+
+        .divi {
             display: flex;
             flex-direction: row;
         }
@@ -218,79 +219,95 @@
             <canvas id="canvas"></canvas>
             <div class="input_table">
                 <%
-                    Result result1 = new Result(0,0,0,"0",0,false);
-                    if (results.size()>0){
-                        result1 = results.get(results.size()-1);
+                    Result result1 = new Result(0, 0, 0, "0", 0, false);
+                    if (results.size() > 0) {
+                        result1 = results.get(results.size() - 1);
                     }
                 %>
                 <div class="rez">
 
-                    <label id="y_value">X=<%=result1.getX()%></label>
-                    <label id="x_value"> Y=<%=result1.getY()%></label>
-                    <label id="r_value">R=<%=result1.getR()%></label>
+                    <label id="y_value">X=<%=result1.getX()%>
+                    </label>
+                    <label id="x_value"> Y=<%=result1.getY()%>
+                    </label>
+                    <label id="r_value">R=<%=result1.getR()%>
+                    </label>
                     Ввод параметров
 
                 </div>
                 <div class="inputs">
-                    <form class="form" action="${pageContext.request.contextPath}/process"  method="POST">
-                        <div class="form__y-input">
-                            <div class="tooltip">
+                    <div class="form__y-input">
+                        <div class="tooltip">
                                 <span class="tooltiptext">
                                     Введите число в интервале [-3;5]
                                 </span>
-                                <label for="xParam"></label><input type="text" id="xParam" name="y"
-                                                                   placeholder="Введите X"
-                                                                   data-tooltip="Введите число в интервале [-3;5]">
-                            </div>
-
-                        </div>
-                        <div class="form__row">
-                            <input type="radio" id="radioButton-2" value="-2" name="x"
-                                   onclick="set_Y_value('radioButton-2')">
-                            <label for="radioButton-2">-2</label>
-                            <input type="radio" id="radioButton-1.5" value="-1.5" name="x"
-                                   onclick="set_Y_value('radioButton-1.5')">
-                            <label for="radioButton-1.5">-1.5</label>
-                            <input type="radio" id="radioButton-1" value="-1" name="x"
-                                   onclick="set_Y_value('radioButton-1')">
-                            <label for="radioButton-1">-1</label>
-                            <input type="radio" id="radioButton-0.5" value="-0.5" name="x"
-                                   onclick="set_Y_value('radioButton-0.5')">
-                            <label for="radioButton-0.5">-0.5</label>
-                            <input type="radio" id="radioButton0" value="0" name="x"
-                                   onclick="set_Y_value('radioButton0')">
-                            <label for="radioButton0">0</label>
-                            <input type="radio" id="radioButton0.5" value="0.5" name="x"
-                                   onclick="set_Y_value('radioButton0.5')">
-                            <label for="radioButton0.5">0.5</label>
-                            <input type="radio" id="radioButton1" value="1" name="x"
-                                   onclick="set_Y_value('radioButton1')">
-                            <label for="radioButton1">1</label>
-                            <input type="radio" id="radioButton1.5" value="1.5" name="x"
-                                   onclick="set_Y_value('radioButton1.5')">
-                            <label for="radioButton1.5">1.5</label>
-                            <input type="radio" id="radioButton2" value="2" name="x"
-                                   onclick="set_Y_value('radioButton2')">
-                            <label for="radioButton2">2</label>
+                            <label for="xParam"></label><input type="text" id="xParam" name="y"
+                                                               placeholder="Введите X"
+                                                               data-tooltip="Введите число в интервале [-3;5]">
                         </div>
 
-                        <div class="form__row">
-                            <input id="X_rez" type="hidden" name="r" value=<%=result1.getR()%>>
-                            <button class="form__x-btn" type="button" value="1" id="b1" name="X" onclick="set_R_value(id)">1</button>
-                            <button class="form__x-btn" type="button" value="1.5" id="b1_5" name="X" onclick="set_R_value(id)">1.5</button>
-                            <button class="form__x-btn" type="button" value="2" id="b2" name="X" onclick="set_R_value(id)">2</button>
-                            <button class="form__x-btn" type="button" value="2.5" id="b2_5" name="X" onclick="set_R_value(id)">2.5</button>
-                            <button class="form__x-btn" type="button" value="3" id="b3" name="X" onclick="set_R_value(id)">3</button>
-                        </div>
-                        <div class="divi">
-                            <input type="submit" value="Тык" />
-<%--                                <button type="button" id="input" class="input_buttons" onclick="chek_input()">Тык--%>
-<%--                                </button>--%>
-                            <form class="form" action="${pageContext.request.contextPath}/process"  method="POST">
-                                <input type="submit" value="clear" onclick="deleteAllCookies()" id="input1"/>
-                            </form>
-                        </div>
-                    </form>
+                    </div>
+                    <div class="form__row">
+                        <input type="radio" id="radioButton-2" value="-2" name="x"
+                               onclick="set_Y_value('radioButton-2')">
+                        <label for="radioButton-2">-2</label>
+                        <input type="radio" id="radioButton-1.5" value="-1.5" name="x"
+                               onclick="set_Y_value('radioButton-1.5')">
+                        <label for="radioButton-1.5">-1.5</label>
+                        <input type="radio" id="radioButton-1" value="-1" name="x"
+                               onclick="set_Y_value('radioButton-1')">
+                        <label for="radioButton-1">-1</label>
+                        <input type="radio" id="radioButton-0.5" value="-0.5" name="x"
+                               onclick="set_Y_value('radioButton-0.5')">
+                        <label for="radioButton-0.5">-0.5</label>
+                        <input type="radio" id="radioButton0" value="0" name="x"
+                               onclick="set_Y_value('radioButton0')">
+                        <label for="radioButton0">0</label>
+                        <input type="radio" id="radioButton0.5" value="0.5" name="x"
+                               onclick="set_Y_value('radioButton0.5')">
+                        <label for="radioButton0.5">0.5</label>
+                        <input type="radio" id="radioButton1" value="1" name="x"
+                               onclick="set_Y_value('radioButton1')">
+                        <label for="radioButton1">1</label>
+                        <input type="radio" id="radioButton1.5" value="1.5" name="x"
+                               onclick="set_Y_value('radioButton1.5')">
+                        <label for="radioButton1.5">1.5</label>
+                        <input type="radio" id="radioButton2" value="2" name="x"
+                               onclick="set_Y_value('radioButton2')">
+                        <label for="radioButton2">2</label>
+                    </div>
+
+                    <div class="form__row">
+
+                        <button class="form__x-btn" type="button" value="1" id="b1" name="X" onclick="set_R_value(id)">
+                            1
+                        </button>
+                        <button class="form__x-btn" type="button" value="1.5" id="b1_5" name="X"
+                                onclick="set_R_value(id)">1.5
+                        </button>
+                        <button class="form__x-btn" type="button" value="2" id="b2" name="X" onclick="set_R_value(id)">
+                            2
+                        </button>
+                        <button class="form__x-btn" type="button" value="2.5" id="b2_5" name="X"
+                                onclick="set_R_value(id)">2.5
+                        </button>
+                        <button class="form__x-btn" type="button" value="3" id="b3" name="X" onclick="set_R_value(id)">
+                            3
+                        </button>
+                    </div>
+                    <div class="divi">
+                        <form class="form" action="${pageContext.request.contextPath}/process" method="POST">
+                            <input id="X_rez" type="hidden" name="y" value=<%=result1.getX()%>>
+                            <input id="Y_rez" type="hidden" name="x" value=<%=result1.getY()%>>
+                            <input id="R_rez" type="hidden" name="r" value=<%=result1.getR()%>>
+                            <input type="submit" id = "subButton" value="Тык"/>
+                        </form>
+                        <%--                                <button type="button" id="input" class="input_buttons" onclick="chek_input()">Тык--%>
+                        <%--                                </button>--%>
+                        <form class="form" action="${pageContext.request.contextPath}/process" method="POST">
+                            <input type="submit" value="clear" onclick="deleteAllCookies()" id="input1"/>
+                        </form>
+                    </div>
                 </div>
 
             </div>
@@ -302,7 +319,7 @@
                         <th>Y</th>
                         <th>R</th>
                         <th>Current time</th>
-                        <th>Execution time</th>
+                        <th>Execution time (ms)</th>
                         <th>Hit detect</th>
                     </tr>
                     </thead>

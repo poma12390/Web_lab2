@@ -2,10 +2,10 @@ canvas = document.getElementById("canvas");
 ctx = canvas.getContext("2d");
 let value_R = 0;
 createSMTH()
-let value_Y=0
-addToTable()
-
-
+let value_X
+let value_Y=parseFloat(document.getElementById("x_value").innerText.split("=")[1])
+//addToTable()
+drawPoint()
 
 function addToTable(){
     //console.log("im in " + document.cookie)
@@ -47,8 +47,9 @@ function drawPoint(){
 
     let y=value_Y
     let r=value_R
-    let x=document.getElementById("xParam").value.replace(/[,]/,".")
-
+    //let x=document.getElementById("xParam").value.replace(/[,]/,".")
+    let x = value_X
+    console.log(x, y ,r + " draw")
     if(x > 1.5*r || y > 1.5*r || x < -1.5 * r || y < -1.5 *r ){
 
     }else {

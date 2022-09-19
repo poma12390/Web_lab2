@@ -2,7 +2,7 @@ canvas = document.getElementById("canvas");
 ctx = canvas.getContext("2d");
 let value_R = 0;
 createSMTH()
-let value_X = parseFloat(document.getElementById("y_value").innerText.split("=")[1])
+let value_X
 let value_Y=parseFloat(document.getElementById("x_value").innerText.split("=")[1])
 //addToTable()
 drawPoint()

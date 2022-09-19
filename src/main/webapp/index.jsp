@@ -1,7 +1,16 @@
+<%@ page import="data.Result" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 <!DOCTYPE html>
 <html lang="en">
-
+<%
+    List<Result> results = new ArrayList<>();
+    if (request.getSession().getAttribute("results") != null) {
+        results = (ArrayList<Result>) request.getSession().getAttribute("results");
+    }
+%>
 <head>
     <meta charset="UTF-8">
     <title>ITMO</title>
@@ -95,7 +104,7 @@
             content: attr(data-tooltip); /* Выводим текст */
         }
 
-        [type='button']:not([name='X']) {
+       input[type="submit"] {
             display: flex;
             margin: 1%;
             height: 28px;
@@ -208,10 +217,17 @@
         <div class="main-table">
             <canvas id="canvas"></canvas>
             <div class="input_table">
+                <%
+                    Result result1 = new Result(0,0,0,"0",0,false);
+                    if (results.size()>0){
+                        result1 = results.get(results.size()-1);
+                    }
+                %>
                 <div class="rez">
-                    <label id="y_value">X=0</label>
-                    <label id="x_value"> Y=0</label>
-                    <label id="r_value">R=0</label>
+
+                    <label id="y_value">X=<%=result1.getX()%></label>
+                    <label id="x_value"> Y=<%=result1.getY()%></label>
+                    <label id="r_value">R=<%=result1.getR()%></label>
                     Ввод параметров
 
                 </div>
@@ -259,7 +275,7 @@
                         </div>
 
                         <div class="form__row">
-                            <input id="X_rez" type="hidden" name="r" value="">
+                            <input id="X_rez" type="hidden" name="r" value=<%=result1.getR()%>>
                             <button class="form__x-btn" type="button" value="1" id="b1" name="X" onclick="set_R_value(id)">1</button>
                             <button class="form__x-btn" type="button" value="1.5" id="b1_5" name="X" onclick="set_R_value(id)">1.5</button>
                             <button class="form__x-btn" type="button" value="2" id="b2" name="X" onclick="set_R_value(id)">2</button>
@@ -270,28 +286,51 @@
                             <input type="submit" value="Тык" />
 <%--                                <button type="button" id="input" class="input_buttons" onclick="chek_input()">Тык--%>
 <%--                                </button>--%>
-
-<%--                            <button type="button" id="input1" class="input_buttons" onclick="deleteAllCookies()">clear--%>
-<%--                            </button>--%>
+                            <form class="form" action="${pageContext.request.contextPath}/process"  method="POST">
+                                <input type="submit" value="clear" onclick="deleteAllCookies()" id="input1"/>
+                            </form>
                         </div>
                     </form>
                 </div>
 
             </div>
             <div class="foot">
-                <table>
+                <table width="100%" id="result-table" class="result-table">
                     <thead>
                     <tr>
                         <th>X</th>
                         <th>Y</th>
                         <th>R</th>
-                        <th>Result</th>
-                        <th>Computation time</th>
                         <th>Current time</th>
+                        <th>Execution time</th>
+                        <th>Hit detect</th>
                     </tr>
                     </thead>
-                    <tbody id=rezTable>
-
+                    <tbody>
+                    <%
+                        //                    if(results != null && results.size() > 0)
+//                    System.out.println(results.get(0).getExecutionTime());
+                        for (int i = 0; i < results.size(); i++) {
+                            Result result = results.get(i);
+                    %>
+                    <tr>
+                        <td><%=result.getX()%>
+                        </td>
+                        <td><%=result.getY()%>
+                        </td>
+                        <td><%=result.getR()%>
+                        </td>
+                        <td><%=result.getCurrTime()%>
+                        </td>
+                        <td><%=result.getExecutionTime()%>
+                        </td>
+                        <td><%=result.getHit()%>
+                        </td>
+                    </tr>
+                    <%
+                        }
+                        ;
+                    %>
                     </tbody>
                 </table>
             </div>

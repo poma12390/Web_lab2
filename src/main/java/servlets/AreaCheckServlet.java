@@ -8,8 +8,6 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.time.OffsetDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -29,7 +27,7 @@ public class AreaCheckServlet extends HttpServlet {
             HttpSession session = req.getSession();
 
             session.setAttribute("validity", "false");
-            boolean validate = validateAll(req.getParameter("x"), req.getParameter("y"), req.getParameter("r"));
+            boolean validate = validateAll(req.getParameter("y"), req.getParameter("x"), req.getParameter("r"));
             if (validate) {
                 long startTime = System.nanoTime();
                 double x = Double.parseDouble(req.getParameter("y"));
@@ -50,36 +48,35 @@ public class AreaCheckServlet extends HttpServlet {
                 session.setAttribute("results", results);
                 session.setAttribute("validity", "true");
 
-                getServletContext().getRequestDispatcher("/table.jsp").forward(req, resp);
+                getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
             } else {
                 throw new IllegalArgumentException("Неверные значения параметров!");
             }
         } catch (IllegalArgumentException|IOException e){
             resp.setStatus(400);
             req.setAttribute("message", "-> Ошибка: " + e.getMessage());
-        }finally {
             req.getRequestDispatcher("index.jsp").forward(req, resp);
         }
 
     }
 
 
-    private boolean validateX(String xString) {
+    private boolean validateY(String xString) {
         try {
             List<Double> rRange = new ArrayList<>(Arrays.asList(-2.0, -1.5, -1.0, -0.5, 0.0, 0.5,1.0, 1.5, 2.0));
 
             double rValue = Double.parseDouble(xString);
             return rRange.contains(rValue);
-        } catch (NumberFormatException exception) {
+        } catch (Exception exception) {
             return false;
         }
     }
 
-    private boolean validateY(String yString) {
+    private boolean validateX(String yString) {
         try {
             double yValue = Double.parseDouble(yString);
             return yValue >= -3 && yValue <= 5;
-        } catch (NumberFormatException exception) {
+        } catch (Exception exception) {
             return false;
         }
     }
@@ -90,13 +87,13 @@ public class AreaCheckServlet extends HttpServlet {
 
             double rValue = Double.parseDouble(rString);
             return rRange.contains(rValue);
-        } catch (NumberFormatException exception) {
+        } catch (Exception exception) {
             return false;
         }
     }
 
     private boolean validateAll(String xString, String yString, String rString) {
-        return validateX(yString) && validateY(xString) && validateR(rString);
+        return validateY(yString) && validateX(xString) && validateR(rString);
     }
 
     private boolean checkHit(double x, double y, int r) {

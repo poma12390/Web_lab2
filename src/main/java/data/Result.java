@@ -1,9 +1,22 @@
 package data;
 
 public class Result {
-    private final double x;
-    private final double y;
-    private final double r;
+    private  double x;
+    private  double y;
+    private  double r;
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public void setY(double y) {
+        this.y = y;
+    }
+
+    public void setR(double r) {
+        this.r = r;
+    }
+
     private final String currTime;
     private double executionTime;
     private final boolean hit;

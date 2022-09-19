@@ -9,7 +9,6 @@ function new_r_value() {
         } else {
             console.log(""+value_R)
             z = (""+value_R).split(".")
-            console.log("b" + z[0] + "_" + z[1] + " setter")
             set_R_value("b" + z[0] + "_" + z[1])
         }
     }
@@ -34,13 +33,15 @@ document.addEventListener('DOMContentLoaded', function () {
 let prev_num=0
 document.querySelector('#xParam').addEventListener('input', function (e) {
     let input = (e.target.value);
-    if (isNaN(input)){
+    if (isNaN(input) && input!=="-"){
         e.target.value=prev_num
     }else if(!e.target.value){
         prev_num=0
         document.getElementById("y_value").innerText = "X = " + prev_num
     }else if((parseFloat(e.target.value)>5) || (parseFloat(e.target.value)<-3)){
         e.target.value=prev_num
+    }else if((input==="-")){
+
     }
     else {
         prev_num=parseFloat(e.target.value)

@@ -36,7 +36,8 @@ public class AreaCheckServlet extends HttpServlet {
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
                 Date date = new Date(System.currentTimeMillis());
                 String currentTime = formatter.format(date);
-                boolean hit = (y <= r && y >= 0 && x >= 0 && x <= r / 2) || (x <= 0 && x >= y - r / 2 && y <= r / 2 && y >= 0) || (x >= 0 && y <= 0 && x * x + y * y <= r * r / 4);
+                //boolean hit = (y <= r && y >= 0 && x >= 0 && x <= r / 2) || (x <= 0 && x >= y - r / 2 && y <= r / 2 && y >= 0) || (x >= 0 && y <= 0 && x * x + y * y <= r * r / 4);
+                boolean hit= ((x * x + y * y <= r * r) || (x>=0 && y<=0 && y>=r/2 && x<=r) || (y<=0 && x<=0 && y>-x-r/2));
                 Result result = new Result(Math.round(x * 100) / 100D, Math.round(y * 100) / 100D, r, currentTime, Math.ceil((System.nanoTime() - startTime) * (Math.pow(10,-3)*(Math.pow(10,5)))) / (Math.pow(10,5)), hit);
                 List<Result> results;
                 if (session.getAttribute("results") == null) {
@@ -63,10 +64,8 @@ public class AreaCheckServlet extends HttpServlet {
 
     private boolean validateY(String xString) {
         try {
-            List<Double> rRange = new ArrayList<>(Arrays.asList(-2.0, -1.5, -1.0, -0.5, 0.0, 0.5,1.0, 1.5, 2.0));
-
-            double rValue = Double.parseDouble(xString);
-            return rRange.contains(rValue);
+            double yValue = Double.parseDouble(xString);
+            return yValue >= -3 && yValue <= 5;
         } catch (Exception exception) {
             return false;
         }

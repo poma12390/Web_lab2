@@ -41,7 +41,56 @@ function deleteAllCookies() {
     }
     document.location.reload()
 }
+document.querySelector('#canvas').addEventListener("click", function (e) {
+    if (value_R ===0){
+        window.alert("Enter R")
+    }else{
+        let moveX = e.pageX - 768
+        let moveY = 240- e.pageY
+        console.log(moveX, moveY)
+        if (Math.abs(moveX)>170 && Math.abs(moveY)>150){
+            window.alert("Can't define coordinates")
+        }else{
+            var body = document.body,
+                html = document.documentElement;
+            if (Math.max( body.scrollHeight, body.offsetHeight,
+                html.clientHeight, html.scrollHeight, html.offsetHeight )>760){
+                moveX+=8
+            }
+            let x_value=value_R*moveX/100
+            let y_value=value_R*moveY/100
 
+            value_Y=y_value
+            value_X=x_value
+            document.getElementById("x_value").innerText = "Y = "+value_Y
+            document.getElementById("y_value").innerText = "X = " + value_X
+            document.getElementById("X_rez").setAttribute("value", ""+x_value )
+            document.getElementById("Y_rez").setAttribute("value", ""+y_value )
+            document.getElementById("R_rez").setAttribute("value", ""+value_R )
+
+            //window.alert(e.pageX +" "+ e.pageY + " " + Math.max( body.scrollHeight, body.offsetHeight,html.clientHeight, html.scrollHeight, html.offsetHeight ))
+            document.getElementById("subButton").click()
+            // let http = new XMLHttpRequest();
+            // let url = '/JavaEEHelloWorld_Web_exploded/process';
+            // let params = 'y=';
+            // params=params+Math.round(x_value * 100) / 100
+            // params=params+'&x='
+            // params=params+Math.round(y_value * 100) / 100
+            // params=params+'&r='
+            // params=params+value_R
+            //
+            // http.open('POST', url, true);
+            //
+            // http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+            //http.send(params);
+            //document.location.reload()
+        }
+
+    }
+
+
+})
 
 function drawPoint(){
 
@@ -51,7 +100,7 @@ function drawPoint(){
     let x = value_X
     console.log(x, y ,r + " draw")
     if(x > 1.5*r || y > 1.5*r || x < -1.5 * r || y < -1.5 *r ){
-
+        createSMTH()
     }else {
         createSMTH()
         ctx.fillStyle = "red";
@@ -136,22 +185,21 @@ function createSMTH(){
 
     ctx.beginPath();
     // ctx.arc(769, 381, 110, 0.5*Math.PI, 0 , true); //сектор круга
-    ctx.fillRect(768,380,110,-220) //прямоугольник
+    ctx.fillRect(768,380,220,110) //прямоугольник
     // ctx.arc(769, 381, 110, 0.5*Math.PI, 0 , true); //сектор круга
     ctx.moveTo(768,380);//треугольник
     ctx.lineTo(658,380)
-    ctx.lineTo(768,270)
-    // ctx.moveTo(768,380)
-    // ctx.lineTo(768,490)
-    // ctx.lineTo(878,380)
+    ctx.lineTo(768,600)
+
+
     ctx.closePath()
     ctx.fill();
 
     ctx.beginPath();
     ctx.moveTo(768, 380);
-    ctx.lineTo(768, 490);
+    ctx.lineTo(768, 600);
     ctx.moveTo(768, 380);
-    ctx.arc(768,380,110,0.5*Math.PI, 0,true);
+    ctx.arc(768,380,220,0, -0.5*Math.PI,true);
     ctx.closePath()
     ctx.fill()
 

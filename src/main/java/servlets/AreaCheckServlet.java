@@ -37,7 +37,7 @@ public class AreaCheckServlet extends HttpServlet {
                 Date date = new Date(System.currentTimeMillis());
                 String currentTime = formatter.format(date);
                 //boolean hit = (y <= r && y >= 0 && x >= 0 && x <= r / 2) || (x <= 0 && x >= y - r / 2 && y <= r / 2 && y >= 0) || (x >= 0 && y <= 0 && x * x + y * y <= r * r / 4);
-                boolean hit= ((x * x + y * y <= r * r) || (x>=0 && y<=0 && y>=r/2 && x<=r) || (y<=0 && x<=0 && y>-x-r/2));
+                boolean hit= ((x * x + y * y <= r * r && x>=0 && y>=0) || (x>=0 && y<=0 && y>=-r/2 && x<=r) || (y<=0 && x<=0 && y>-x-r/2));
                 Result result = new Result(Math.round(x * 100) / 100D, Math.round(y * 100) / 100D, r, currentTime, Math.ceil((System.nanoTime() - startTime) * (Math.pow(10,-3)*(Math.pow(10,5)))) / (Math.pow(10,5)), hit);
                 List<Result> results;
                 if (session.getAttribute("results") == null) {
@@ -95,9 +95,4 @@ public class AreaCheckServlet extends HttpServlet {
         return validateY(yString) && validateX(xString) && validateR(rString);
     }
 
-    private boolean checkHit(double x, double y, int r) {
-        return (x <= 0 && y <= 0 && y >= -x / 2 - (double) r / 2) ||
-                (x <= 0 && y >= 0 && x >= -(double) r / 2 && y <= r) ||
-                (x >= 0 && y <= 0 && Math.pow(x, 2) + Math.pow(y, 2) <= Math.pow(r, 2));
-    }
 }

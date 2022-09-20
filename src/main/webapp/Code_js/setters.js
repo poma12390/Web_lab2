@@ -7,7 +7,6 @@ function new_r_value() {
         if ((""+value_R).length===1) {
             set_R_value("b" + value_R)
         } else {
-            console.log(""+value_R)
             z = (""+value_R).split(".")
             set_R_value("b" + z[0] + "_" + z[1])
         }
@@ -17,11 +16,16 @@ function new_y_value(){
     value_Y=parseFloat(document.getElementById("x_value").innerText.split("=")[1])
 }
 function new_x_value() {
-    console.log(document.getElementById("y_value").innerText.split("=")[1]+ " log")
+    //console.log(document.getElementById("y_value").innerText.split("=")[1]+ " log")
     value_X = parseFloat(document.getElementById("y_value").innerText.split("=")[1])
     document.getElementById("X_rez").setAttribute("value", value_X )
 }
 document.addEventListener('DOMContentLoaded', function () {
+    var url = window.location.pathname;
+    console.log(url)
+    if(url !== '/JavaEEHelloWorld_Web_exploded/'){
+        window.location.replace("/JavaEEHelloWorld_Web_exploded/");
+    }
     new_x_value()
     new_y_value()
     console.log(value_X, value_Y + " x, y ")
@@ -29,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log(value_R + " R")
     drawPoint()
 });
+
 
 let prev_num=0
 document.querySelector('#xParam').addEventListener('input', function (e) {

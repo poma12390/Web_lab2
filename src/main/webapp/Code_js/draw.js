@@ -47,8 +47,8 @@ document.querySelector('#canvas').addEventListener("click", function (e) {
     }else{
         let moveX = e.pageX - 768
         let moveY = 240- e.pageY
-        console.log(moveX, moveY)
-        if (Math.abs(moveX)>170 && Math.abs(moveY)>150){
+        //console.log(moveX, moveY)
+        if ((Math.abs(moveX)>170) || (Math.abs(moveY)>150)){
             window.alert("Can't define coordinates")
         }else{
             var body = document.body,
@@ -98,7 +98,7 @@ function drawPoint(){
     let r=value_R
     //let x=document.getElementById("xParam").value.replace(/[,]/,".")
     let x = value_X
-    console.log(x, y ,r + " draw")
+    //console.log(x, y ,r + " draw")
     if(x > 1.5*r || y > 1.5*r || x < -1.5 * r || y < -1.5 *r ){
         createSMTH()
     }else {

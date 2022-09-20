@@ -211,7 +211,7 @@
 <div class="table">
     <div class="proga">
         <div class="header">
-            <h1>Кочнев Роман P32081 Вариант 1707
+            <h1>Кочнев Роман P32081 Вариант 4621
             </h1>
         </div>
         <div class="main-table">
@@ -286,7 +286,7 @@
                             <input type="submit" value="Тык" />
 <%--                                <button type="button" id="input" class="input_buttons" onclick="chek_input()">Тык--%>
 <%--                                </button>--%>
-                            <form class="form" action="${pageContext.request.contextPath}/process"  method="POST">
+                            <form class="form" action="${pageContext.request.contextPath}/process"  method="POST" id = "subForm">
                                 <input type="submit" value="clear" onclick="deleteAllCookies()" id="input1"/>
                             </form>
                         </div>
@@ -342,6 +342,9 @@
 
 
 <script src="app.js"></script>
+<script>
+
+</script>
 <script type="text/javascript" src="Code_js/draw.js"></script>
 <script type="text/javascript" src="Code_js/Valid.js"></script>
 <script type="text/javascript" src="Code_js/setters.js"></script>

@@ -212,7 +212,7 @@
 <div class="table">
     <div class="proga">
         <div class="header">
-            <h1>Кочнев Роман P32081 Вариант 1707
+            <h1>Кочнев Роман P32081 Вариант 4621
             </h1>
         </div>
         <div class="main-table">
